@@ -79,9 +79,12 @@ Copy-Item .env.example .env
 
 The provider must expose an OpenAI-compatible `/chat/completions` endpoint and
 support structured JSON output. Configuration is read from the process
-environment; when using `.env`, pass it explicitly to Uvicorn:
+environment, and the project-local `.env` is loaded automatically. Both launch
+styles are supported:
 
 ```powershell
+python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+# Equivalent explicit form:
 python -m uvicorn app.main:app --env-file .env --host 0.0.0.0 --port 8000
 ```
 

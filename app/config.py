@@ -3,6 +3,16 @@ from __future__ import annotations
 import os
 import math
 from dataclasses import dataclass
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+
+# Uvicorn can load a dotenv file with ``--env-file``, but the application is
+# also commonly started directly or from an IDE. Load the project-local file
+# here while preserving explicitly supplied environment variables.
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(_PROJECT_ROOT / ".env", override=False)
 
 
 def _env_float(name: str, default: float) -> float:
